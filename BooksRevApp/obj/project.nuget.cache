@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "m25mQLDOJgAsemqHgtDdAOT4QYYMEM+dPMQ7R64bPu619ZPS/7/kq2+mFnsDHMD+GHCO8N+A6rvI5vwQ1F81Wg==",
+  "dgSpecHash": "CghVpYBC1OljePNj1OD5ruyxf26luKpBYIw1YZsaiADM5l0EBzzvaT+8Tnsi1HtaUxfLl9Wlw1Y+mIy7poWR6g==",
   "success": true,
   "projectFilePath": "D:\\.NET\\BooksRevApp\\BooksRevApp\\BooksRevApp\\BooksRevApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\fluentvalidation\\8.6.2\\fluentvalidation.8.6.2.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\fluentvalidation.aspnetcore\\8.6.2\\fluentvalidation.aspnetcore.8.6.2.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\8.6.2\\fluentvalidation.dependencyinjectionextensions.8.6.2.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
