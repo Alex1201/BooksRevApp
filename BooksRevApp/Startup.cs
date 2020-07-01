@@ -51,8 +51,8 @@ namespace BooksRevApp
                     TermsOfService = new Uri("https://github.com/Alex1201"),
                     Contact = new OpenApiContact
                     {
-                        Name = "ID",
-                        Email = "id@id.com"
+                        Name = "Alex",
+                        Email = "alex@email.com"
                     },
                     License = new OpenApiLicense
                     {
@@ -61,9 +61,9 @@ namespace BooksRevApp
                     }
                 });
                 // Set the comments path for the Swagger JSON and UI.
-                /*var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);*/
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
