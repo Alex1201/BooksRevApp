@@ -24,6 +24,7 @@ namespace BooksRevApp
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,6 +41,16 @@ namespace BooksRevApp
             services.AddDbContext<BooksContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("BooksDbConnectionString")));
             //Registering validators with the services collection
             services.AddTransient<IValidator<Book>, BookValidator>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -84,6 +95,8 @@ namespace BooksRevApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
