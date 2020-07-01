@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using BooksApp.ClientApp.Model;
 using BooksRevApp.Model;
+using BooksRevApp.Validators;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +36,7 @@ namespace BooksRevApp
                 .AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly())); ;
             services.AddDbContext<BooksContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("BooksDbConnectionString")));
+            services.AddTransient<IValidator<Book>, BookValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
