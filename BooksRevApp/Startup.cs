@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using BooksApp.ClientApp.Model;
+using BooksRevApp.ClientApp.Model;
 using BooksRevApp.Helpers;
 using BooksRevApp.Model;
 using BooksRevApp.Services;
