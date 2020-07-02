@@ -5,9 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using BooksRevApp.ClientApp.Model;
-using BooksRevApp.Helpers;
 using BooksRevApp.Model;
+using BooksRevApp.Helpers;
 using BooksRevApp.Services;
 using BooksRevApp.Validators;
 using FluentValidation;
@@ -24,6 +23,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using BooksRevApp.DbContexts;
+using AutoMapper;
+using System.Net.Mail;
+using System.Net;
 
 namespace BooksRevApp
 {
@@ -109,6 +112,19 @@ namespace BooksRevApp
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<SmtpClient>((serviceProvider) =>
+            {
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                return new SmtpClient()
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    Credentials = new NetworkCredential("alexandru.muresan12@gmail.com", "alex308014"),
+                    EnableSsl = true
+                };
             });
         }
 
