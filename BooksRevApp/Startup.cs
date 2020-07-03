@@ -126,6 +126,11 @@ namespace BooksRevApp
                     EnableSsl = true
                 };
             });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -150,6 +155,10 @@ namespace BooksRevApp
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
+            app.UseSpaStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -157,6 +166,11 @@ namespace BooksRevApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "wwwroot";
             });
         }
     }
