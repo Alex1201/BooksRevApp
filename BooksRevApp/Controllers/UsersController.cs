@@ -60,11 +60,12 @@ namespace BooksRevApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(long id)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+          /*  if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
-
+            */
+            
             var user = await _userService.GetUserById(id);
             var result = _mapper.Map<UserDto>(user);
 
@@ -74,10 +75,11 @@ namespace BooksRevApp.Controllers
         [HttpGet("{id}/favouritebooks")]
         public async Task<IActionResult> GetUsersFavouriteBooks(long id)
         {
-            /*if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized();
-            }*/
+            // TODO
+            //if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //{
+            //    return Unauthorized();
+            //}
 
             var books = await _userService.GetFavouriteBooks(id);
             var result = _mapper.Map<IEnumerable<BookDto>>(books);

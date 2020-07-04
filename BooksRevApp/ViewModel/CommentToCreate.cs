@@ -7,6 +7,6 @@ namespace BooksRevApp.ViewModel
 {
     public class CommentToCreate
     {
-        public string TextComment { get; set; }
+        public string Text { get; set; }
     }
 }

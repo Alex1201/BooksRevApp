@@ -1,9 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CommentForPost } from '../model/comment/comment';
 import { environment } from 'src/environments/environment';
-import { Comment } from '../model/comment/commentForApproval';
+import { CommentForApproval } from '../model/comment/commentForApproval';
 
 
 @Injectable({
@@ -20,16 +20,16 @@ export class CommentService {
     return this.http.post<CommentForPost>(`${this.baseUrl}/api/books/${bookId}/comments`, comment);
   }
 
-  deleteComment(commentId: number): Observable<CommentForPost> {
-    return this.http.delete<CommentForPost>(`${this.baseUrl}/api/comments/${commentId}`);
+  deleteComment(userCommentId: number): Observable<CommentForPost> {
+    return this.http.delete<CommentForPost>(`${this.baseUrl}/api/comments/${userCommentId}`);
   }
 
   updateComment(comment: CommentForPost, commentId: number): Observable<CommentForPost> {
     return this.http.put<CommentForPost>(`${this.baseUrl}/api/comments/${commentId}`, comment);
   }
 
-  getCommentsForApproval(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(this.baseUrl + '/api/comments');
+  getCommentsForApproval(): Observable<CommentForApproval[]> {
+    return this.http.get<CommentForApproval[]>(this.baseUrl + '/api/comments');
   }
 
   approveComment(commentId: number) {

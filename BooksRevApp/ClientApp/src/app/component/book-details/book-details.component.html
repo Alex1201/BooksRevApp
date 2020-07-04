@@ -82,7 +82,7 @@
             <tbody>
               <tr *ngFor="let comment of currentBook.userComments">
                 <td>{{ comment.username }}</td>
-                <td>{{ comment.textComment }}</td>
+                <td>{{ comment.text }}</td>
                 <td>{{ comment.whenAdded | timeAgo }}</td>
                 <td>
                   <a *ngIf="comment.username === loggedUser" class="btn btn-outline-primary btn-sm mr-3"

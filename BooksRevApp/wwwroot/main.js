@@ -1879,9 +1879,9 @@ let LoginComponent = class LoginComponent {
     }
     loginUser() {
         this.authService.loginUser(this.loginForm.value).subscribe(user => {
-            localStorage.setItem('token', user.token);
+            //localStorage.setItem('token', user.token);
             this.authService.decodeToken();
-            this.authService.changeLoggedInUser(user.username);
+            //this.authService.changeLoggedInUser(user.username);
             this.router.navigate(['/books']);
             this.alertify.success('Successfully logged in');
         }, _ => this.alertify.error('Invalid username or password'));
@@ -2156,6 +2156,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _alertify_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./alertify.service */ "./src/app/service/alertify.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
 
 
 
@@ -2179,7 +2181,12 @@ let AuthService = class AuthService {
         return this.http.post(this.baseUrl, user);
     }
     loginUser(user) {
-        return this.http.post(this.baseUrl + '/authenticate', user);
+        return this.http.post(this.baseUrl + '/authenticate', user).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((response) => {
+            const user = response;
+            if (user) {
+                localStorage.setItem('token', user.token);
+            }
+        }));
     }
     getUserById(id) {
         return this.http.get(this.baseUrl + `/${id}`);

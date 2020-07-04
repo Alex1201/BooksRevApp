@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Comment } from '../model/comment/commentForApproval';
+import { CommentForApproval } from '../model/comment/commentForApproval';
 import { CommentService } from '../service/comment.service';
 import { AlertifyService } from '../service/alertify.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,8 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ApproveCommentsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['username', 'book', 'commentText', 'addedOn', 'operations'];
-  dataSource: MatTableDataSource<Comment>;
-  comments: Comment[];
+  dataSource: MatTableDataSource<CommentForApproval>;
+  comments: CommentForApproval[];
 
 
   constructor(
@@ -26,9 +26,10 @@ export class ApproveCommentsComponent implements OnInit, OnDestroy {
   }
 
   loadComments() {
-    this.commentService.getCommentsForApproval().subscribe(comments => {
+    this.commentService.getCommentsForApproval()
+    .subscribe(comments => {
       this.comments = comments;
-      this.dataSource = new MatTableDataSource<Comment>(this.comments);
+      this.dataSource = new MatTableDataSource<CommentForApproval>(this.comments);
     }, error => {
       console.log(error);
       this.alertify.error(error);

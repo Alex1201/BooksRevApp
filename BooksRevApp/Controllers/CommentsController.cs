@@ -12,6 +12,7 @@ using BooksRevApp.ViewModel;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using BooksRevApp.DbContexts;
+using BooksRevApp.Services;
 
 namespace BooksRevApp.Controllers
 {
@@ -21,17 +22,17 @@ namespace BooksRevApp.Controllers
     {
         private readonly BooksContext _context;
         private readonly IMapper _mapper;
+        private readonly IUserService _user;
 
-        public CommentsController(BooksContext context, IMapper mapper)
+        public CommentsController(BooksContext context, IMapper mapper, IUserService userService)
         {
             _context = context;
             _mapper = mapper;
+            _user = userService;
         }
 
-        //[Authorize(Roles = $"{UserRole.Admin},{UserRole.Moderator}")]
-        [Authorize(Roles = "Admin,Moderator")]
         [HttpGet]
-        public async Task<IActionResult> GetUnapprovedComments()
+        public async Task<ActionResult<IEnumerable<CommentToApproveDto>>> GetComments()
         {
             var userComments = await _context.UserComments
                                             .Include(uc => uc.Comment)
@@ -47,7 +48,6 @@ namespace BooksRevApp.Controllers
             return Ok(comments);
         }
 
-        [Authorize(Roles = "Admin,Moderator")]
         [HttpPost("approve/{id}")]
         public async Task<IActionResult> ApproveComment(long id)
         {
@@ -66,7 +66,6 @@ namespace BooksRevApp.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin,Moderator")]
         [HttpPost("reject/{id}")]
         public async Task<IActionResult> RejectComment(long id)
         {
@@ -94,18 +93,18 @@ namespace BooksRevApp.Controllers
         [HttpPut("{commentId}")]
         public async Task<ActionResult<Comment>> PutComment(long commentId, CommentToUpdate commentForUpdate)
         {
-
-
             // Authorize: check if user submitting is the same as author of the comment
             UserComment userComment = await _context.UserComments.FirstOrDefaultAsync(uc => uc.CommentId == commentId);
             if (userComment == null)
             {
                 return BadRequest();
             }
-            if (userComment.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (userComment.UserId != _user.GetUserId())
             {
                 return Unauthorized();
             }
+
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
 
             if (commentId != commentForUpdate.Id)
             {
@@ -117,27 +116,31 @@ namespace BooksRevApp.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
-
-            comment.Text = commentForUpdate.TextComment;
+            comment.Text = commentForUpdate.Text;
 
             await _context.SaveChangesAsync();
 
             return Ok();
         }
 
-        [HttpDelete("{commentId}")]
-        public async Task<ActionResult<Comment>> DeleteComment(long commentId)
+        [HttpDelete("{userCommentId}")]
+        public async Task<ActionResult<Comment>> DeleteComment(long userCommentId)
         {
-            if (!CommentExists(commentId))
+            if (!UserCommentExists(userCommentId))
             {
                 return NotFound();
             }
 
-            UserComment userComment = await _context.UserComments.FirstOrDefaultAsync(uc => uc.CommentId == commentId);
-            if (userComment.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            UserComment userComment = await _context.UserComments.FirstOrDefaultAsync(uc => uc.Id == userCommentId);
+            if (userComment.UserId != _user.GetUserId())
             {
                 return Unauthorized();
+            }
+
+            var commentId = userComment.CommentId;
+            if (!CommentExists(commentId))
+            {
+                return NotFound();
             }
 
             var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
@@ -153,6 +156,10 @@ namespace BooksRevApp.Controllers
         private bool CommentExists(long id)
         {
             return _context.Comments.Any(e => e.Id == id);
+        }
+        private bool UserCommentExists(long id)
+        {
+            return _context.UserComments.Any(e => e.Id == id);
         }
     }
 }

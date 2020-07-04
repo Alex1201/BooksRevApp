@@ -10,7 +10,7 @@ namespace BooksRevApp.ViewModel
         public long Id { get; set; }
         public string Book { get; set; }
         public string Username { get; set; }
-        public string TextComment { get; set; }
+        public string Text { get; set; }
         public DateTime WhenAdded { get; set; }
 
     }

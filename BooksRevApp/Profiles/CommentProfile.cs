@@ -17,7 +17,7 @@ namespace BooksRevApp.Profiles
                     dest => dest.Username,
                     opt => opt.MapFrom(src => src.User.Username))
                 .ForMember(
-                    dest => dest.TextComment,
+                    dest => dest.Text,
                     opt => opt.MapFrom(src => src.Comment.Text))
                 .ForMember(
                     dest => dest.WhenAdded,
@@ -34,7 +34,7 @@ namespace BooksRevApp.Profiles
                    dest => dest.Username,
                    opt => opt.MapFrom(src => src.User.Username))
                .ForMember(
-                   dest => dest.TextComment,
+                   dest => dest.Text,
                    opt => opt.MapFrom(src => src.Comment.Text))
                .ForMember(
                    dest => dest.WhenAdded,

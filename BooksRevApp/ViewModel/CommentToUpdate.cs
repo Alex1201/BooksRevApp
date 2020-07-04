@@ -8,7 +8,7 @@ namespace BooksRevApp.ViewModel
     public class CommentToUpdate
     {
         public long Id { get; set; }
-        public string TextComment { get; set; }
+        public string Text { get; set; }
 
     }
 }

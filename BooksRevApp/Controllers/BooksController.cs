@@ -11,6 +11,8 @@ using System.Security.Claims;
 using AutoMapper;
 using BooksRevApp.DbContexts;
 using BooksRevApp.Model;
+using System.Diagnostics;
+using BooksRevApp.Services;
 
 namespace BooksRevApp.Controllers
 {
@@ -20,11 +22,13 @@ namespace BooksRevApp.Controllers
     {
         private readonly BooksContext _context;
         private readonly IMapper _mapper;
+        private readonly IUserService _user;
 
-        public BooksController(BooksContext context, IMapper mapper)
+        public BooksController(BooksContext context, IMapper mapper, IUserService userService)
         {
             _context = context;
             _mapper = mapper;
+            _user = userService;
         }
 
         // GET: api/Books
@@ -72,7 +76,7 @@ namespace BooksRevApp.Controllers
         // PUT: api/Books/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize(Roles = UserRole.Admin)]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBook(long id, BookDto book)
         {
@@ -139,11 +143,10 @@ namespace BooksRevApp.Controllers
             return bookToReturn;
         }
 
-        [Authorize]
         [HttpPost("{bookId}/comments")]
         public async Task<ActionResult<Comment>> PostComment(long bookId, CommentToCreate commentToCreate)
         {
-            long userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            long userId = _user.GetUserId();
 
             if (!BookExists(bookId))
             {
@@ -167,7 +170,7 @@ namespace BooksRevApp.Controllers
             var updatedBook = await _context.Books.FindAsync(bookId);
             updatedBook.UserComments.Add(userComment);
 
-            var updatedUser = await _context.Users.FindAsync(userId);            
+            var updatedUser = await _context.Users.FindAsync(userId);
             updatedUser.UserComments.Add(userComment);
 
             return Ok();

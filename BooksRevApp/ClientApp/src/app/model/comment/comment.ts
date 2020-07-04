@@ -1,6 +1,6 @@
 export class CommentForPost {
   id: number;
-  textComment: string;
+  text: string;
   username: string;
   whenAdded: Date;
 }

@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using BooksRevApp.DbContexts;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BooksRevApp.Services
 {
@@ -25,11 +26,14 @@ namespace BooksRevApp.Services
         bool UsernameExists(string username);
         Task<bool> SaveAll();
         Task<IEnumerable<Book>> GetFavouriteBooks(long userId);
+
+        public long GetUserId();
     }
     public class UserService : IUserService
     {
         private readonly AppSettings _appSettings;
         private readonly BooksContext _context;
+        private static long UserId;
 
         public UserService(IOptions<AppSettings> appSettings, BooksContext context)
         {
@@ -53,13 +57,16 @@ namespace BooksRevApp.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Username)
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Role, user.UserRole)
                 }),
                 Expires = DateTime.UtcNow.AddDays(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
+
+            UserId = user.Id;
 
             return user;
         }
@@ -84,6 +91,11 @@ namespace BooksRevApp.Services
         public async Task<User> GetUserById(long id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public long GetUserId()
+        {
+            return UserId;
         }
 
         public async Task<User> GetUserByUsernameAndEmail(string username, string email)

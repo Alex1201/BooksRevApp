@@ -1,8 +1,8 @@
-export interface Comment {
+export interface CommentForApproval {
     id: number;
     book: string;
     username: string;
-    textComment: string;
-    recipientId: number;
+    text: string;
+    // recipientId: number;
     whenAdded: string;
 }

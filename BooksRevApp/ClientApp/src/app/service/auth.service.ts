@@ -7,6 +7,7 @@ import { User } from '../model/user/user';
 import { environment } from 'src/environments/environment';
 import { AlertifyService } from './alertify.service';
 import { Book } from '../model/book/book';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -33,6 +34,14 @@ export class AuthService {
 
     loginUser(user: User) {
         return this.http.post<User>(this.baseUrl + '/authenticate', user);
+            // .pipe(
+            // map((response: any) => {
+            //     const user = response;
+            //     if (user) {
+            //         localStorage.setItem('token', user.token);
+            //     }
+            // })
+        // );
     }
 
     getUserById(id: number) {
@@ -67,7 +76,7 @@ export class AuthService {
     roleMatch(allowedRoles): boolean {
         let isMatch = false;
         if (this.isLoggedIn) {
-            const userRole = this.decodedToken.role;
+            const userRole = this.decodeToken().role;
             if (allowedRoles.includes(userRole)) {
                 isMatch = true;
             }

@@ -16,9 +16,11 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'books', component: BookListComponent },
-  { path: 'books/new', component: AddBookComponent,
+  {
+    path: 'books/new',
+    component: AddBookComponent,
     data: { roles: ['Admin'] },
-    canActivate: [AuthGuardChild]
+    canActivate: [AuthGuardChild],
   },
   { path: 'books/:id', component: BookDetailsComponent },
   { path: 'favourites', component: BookListComponent },
@@ -26,16 +28,16 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   {
-    path: 'commentsToApprove', component: ApproveCommentsComponent,
+    path: 'commentsToApprove',
+    component: ApproveCommentsComponent,
     data: { roles: ['Admin', 'Moderator'] },
-    canActivate: [AuthGuardChild]
+    canActivate: [AuthGuardChild],
   },
   { path: '**', redirectTo: 'books', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
