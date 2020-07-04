@@ -1,11 +1,11 @@
 <div class="container book-list-jumboton">
   <div class="jumbotron">
     <h1 *ngIf="!isFavourites">
-      <fa name="film">
-      </fa> Welcome to BookRevs App <fa name="film"></fa>
+      <fa name="book">
+      </fa> Welcome to Books App <fa name="book"></fa>
     </h1>
     <h1 *ngIf="isFavourites">
-      <fa name="film"></fa> Favourite Books <fa name="film"></fa>
+      <fa name="book"></fa> Favourite Books <fa name="book"></fa>
     </h1>
     <p class="subtitle" *ngIf="isFavourites">Your preferred books at a glance</p>
     <p class="subtitle" *ngIf="!isFavourites">Your favourite place to discuss and review the latest books</p>
@@ -39,7 +39,7 @@
             *ngFor="let item of constuctEmptyArray(book.rating)" class="rating-star" name="star"></fa>
         </p>
         <p *ngIf="book.rating == 0">Not rated yet</p>
-        <p>{{ book.plotSummary | slice:0:50 }}...</p>
+        <p>{{ book.description | slice:0:50 }}...</p>
         <p>
           <a class="btn btn-primary mb-3" [routerLink]="['/books/', book.id]">More Info</a>
         </p>

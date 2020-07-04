@@ -18,7 +18,7 @@ using BooksRevApp.Helpers;
 
 namespace BooksRevApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -74,10 +74,10 @@ namespace BooksRevApp.Controllers
         [HttpGet("{id}/favouritebooks")]
         public async Task<IActionResult> GetUsersFavouriteBooks(long id)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            /*if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
-            }
+            }*/
 
             var books = await _userService.GetFavouriteBooks(id);
             var result = _mapper.Map<IEnumerable<BookDto>>(books);

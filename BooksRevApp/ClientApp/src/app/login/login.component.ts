@@ -14,14 +14,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm: FormGroup;
 
-  constructor(  
+  constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private alertify: AlertifyService) {
     document.body.className = 'hidescrollbar';
   }
-     
+
   ngOnInit() {
     this.authService.logout();
     this.loginForm = this.formBuilder.group({

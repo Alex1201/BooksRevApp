@@ -16,6 +16,20 @@
     </div>
 
     <div class="form-group">
+      <label class="font-weight-bold">Author</label>
+      <input type="text"
+             class="form-control form-control-sm book"
+             name="author"
+             formControlName="author"
+             required>
+      <div *ngIf="bookForm.controls['author'].invalid && (bookForm.controls['author'].dirty || bookForm.controls['author'].touched)" class="text-danger">
+        <div *ngIf="bookForm.controls['author'].errors.required">
+          Author is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="font-weight-bold">Year</label>
       <input type="number"
              class="form-control book"
@@ -47,55 +61,60 @@
     </div>
 
     <div class="form-group">
-      <label class="font-weight-bold">Plot Summary</label>
-      <textarea name="plotSummary"
+      <label class="font-weight-bold">Description</label>
+      <textarea name="description"
                 class="form-control book"
-                formControlName="plotSummary"
+                formControlName="description"
                 required>
     </textarea>
-      <div *ngIf="bookForm.controls['plotSummary'].invalid && (bookForm.controls['plotSummary'].dirty || bookForm.controls['plotSummary'].touched)" class="text-danger">Enter a description of the book.</div>
+      <div *ngIf="bookForm.controls['description'].invalid && (bookForm.controls['description'].dirty || bookForm.controls['description'].touched)" class="text-danger">Enter a description of the book.</div>
     </div>
 
     <div class="form-group">
-      <label class="font-weight-bold">Gross Takings Amount</label>
+      <label class="font-weight-bold">Earnings Amount</label>
       <input type="number"
              class="form-control book"
-             name="grossTakingsAmount"
-             formControlName="grossTakingsAmount"
+             name="earnings"
+             formControlName="earnings"
              required>
-      <div *ngIf="bookForm.controls['grossTakingsAmount'].invalid && (bookForm.controls['grossTakingsAmount'].dirty || bookForm.controls['grossTakingsAmount'].touched)" class="text-danger">
-        <div *ngIf="bookForm.controls['grossTakingsAmount'].errors.required">
-          Gross amount is required.
+      <div *ngIf="bookForm.controls['earnings'].invalid && (bookForm.controls['earnings'].dirty || bookForm.controls['earnings'].touched)" class="text-danger">
+        <div *ngIf="bookForm.controls['earnings'].errors.required">
+          Earnings required.
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="font-weight-bold">Available on DVD&nbsp;&nbsp; </label>
+      <label class="font-weight-bold">Available in electronic format&nbsp;&nbsp; </label>
 
       <input class="radio-button"
              type="radio"
-             name="isAvailableOnDVD"
+             name="isElectronicFormat"
              [value]="true"
              required
-             formControlName="isAvailableOnDVD"> Yes&nbsp;
+             formControlName="isElectronicFormat"> Yes&nbsp;
       <input class="radio-button"
              type="radio"
-             name="isAvailableOnDVD"
+             name="isElectronicFormat"
              [value]="false"
              required
-             formControlName="isAvailableOnDVD"> No
+             formControlName="isElectronicFormat"> No
     </div>
 
     <div class="form-group">
       <label class="font-weight-bold">Genre</label>
       <select name="genre" formControlName="genre" class="form-control book" required>
-        <option value="Action">Action</option>
-        <option value="Adventure">Adventure</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Drama">Drama</option>
-        <option value="Horror">Horror</option>
-        <option value="Thriller">Thriller</option>
+        <option value="Finction">Finction</option>
+        <option value="Poetry">Poetry</option>
+        <option value="Narrative">Narrative</option>
+        <option value="Encyclopedia">Encyclopedia</option>
+        <option value="Historical">Historical</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Biography">Biography</option>
+        <option value="Philosophy">Philosophy</option>
+        <option value="Psychology">Psychology</option>
+        <option value="PersonalDevelopment">PersonalDevelopment</option>
       </select>
       <div *ngIf="bookForm.controls['genre'].invalid && (bookForm.controls['genre'].dirty || bookForm.controls['genre'].touched)" class="text-danger">
         <div *ngIf="bookForm.controls['genre'].errors.required">

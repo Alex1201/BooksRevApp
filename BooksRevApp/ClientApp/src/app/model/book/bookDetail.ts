@@ -1,3 +1,5 @@
+import { CommentForPost } from '../comment/comment';
+
 export interface BookDetail {
     id: number;
     title: string;
@@ -9,5 +11,6 @@ export interface BookDetail {
     genre: string;
     rating: number;
     pictureURL: string;
-    comments?: string[];
+    // comments?: string[];
+    userComments?: CommentForPost[];
 }

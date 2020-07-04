@@ -14,6 +14,8 @@ D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\servi
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\service\auth.service.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\app.component.js
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\app.component.js.map
+D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\comment.js
+D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\comment.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\book\bookDetail.js
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\book\bookDetail.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\user\user-rating.js
@@ -24,8 +26,6 @@ D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\compo
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\component\book-list\book-list.component.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\home\home.component.js
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\home\home.component.js.map
-D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\comment.js
-D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\comment.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\commentForApproval.js
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\model\comment\commentForApproval.js.map
 D:\.NET\BooksRevApp\BooksRevApp\BooksRevApp\ClientApp\dist\out-tsc\src\app\service\comment.service.js

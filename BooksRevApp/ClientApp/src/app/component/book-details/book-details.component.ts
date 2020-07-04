@@ -86,6 +86,7 @@ export class BookDetailsComponent implements OnInit {
   getDetails() {
     this.bookService.getBookDetails(this.bookId).subscribe(
       book => {
+        console.log(book);
         this.currentBook = book;
       }
     );

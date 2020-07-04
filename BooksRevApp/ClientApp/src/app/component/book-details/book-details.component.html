@@ -18,25 +18,7 @@
           </h5>
           <h5 *ngIf="currentBook.rating == 0"><b>Rating: </b>Not rated yet</h5>
           <hr />
-          <!-- <h4 *ngIf="currentBook.personRoles.length > 0"><b>Cast</b></h4> -->
-          <!-- <table class="table table-sm table-borderless" *ngIf="currentBook.personRoles.length > 0">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Date of birth</th>
-                <th>Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let person of currentBook.personRoles">
-                <td>{{person.name}}</td>
-                <td>{{person.surname}}</td>
-                <td>{{person.dateOfBirth | date}}</td>
-                <td>{{person.role}}</td>
-              </tr>
-            </tbody>
-          </table> -->
+          
           <div class="row" id="book-details-btn">
             <div class="col-sm-12">
               <div *ngIf="!addCommentMode && isUserLoggedIn" class="col-sm-6" id="add-comment-btn">
@@ -87,8 +69,8 @@
             </div>
           </div>
 
-          <h4 *ngIf="currentBook.comments.length > 0">Comments:</h4>
-          <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="currentBook.comments.length > 0">
+          <h4 *ngIf="currentBook.userComments.length > 0">Comments:</h4>
+          <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="currentBook.userComments.length > 0">
             <thead>
               <tr>
                 <th style="width: 10%;">Username</th>
@@ -98,15 +80,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let comment of currentBook.comments">
+              <tr *ngFor="let comment of currentBook.userComments">
                 <td>{{ comment.username }}</td>
-                <td>{{ comment.commentText }}</td>
-                <td>{{ comment.addedOn | timeAgo }}</td>
+                <td>{{ comment.textComment }}</td>
+                <td>{{ comment.whenAdded | timeAgo }}</td>
                 <td>
                   <a *ngIf="comment.username === loggedUser" class="btn btn-outline-primary btn-sm mr-3"
                      (click)="updateCommentFormToggle(comment)">Update</a>
                   <a *ngIf="comment.username === loggedUser" class="btn btn-outline-danger btn-sm"
-                     (click)="deleteComment(comment.commentId)" (onSubmit)="reloadData()">Delete</a>
+                     (click)="deleteComment(comment.id)" (onSubmit)="reloadData()">Delete</a>
                 </td>
               </tr>
             </tbody>
